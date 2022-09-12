@@ -146,5 +146,11 @@
 // CrossLinesPoint (a, b, c, d);
 
 
-
-
+void PPPP ()
+{
+    for (int i = 0; i<10; i++)
+    {
+        Console.Write ($" {i}");
+    }
+}
+PPPP();
