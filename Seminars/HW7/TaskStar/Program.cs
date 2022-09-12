@@ -1,31 +1,38 @@
-﻿// Задача со звездочкой: Написать программу для перевода римских чисел в десятичные арабские.
+﻿// Задача со звездочкой: Из римских в арабские
 
-void ArabicIntoRoman (int num, string [,] table)
+void RomanIntoArabic (string a)
 {
-    string addFigures = "";
-    for (int i = 0; i != 4; i++)
+    char [] b = new char [a.Length];
+
+    for (int i=0; i<a.Length; i++)
     {
-        addFigures = table[i, num%10] + addFigures;
-        // Console.Write($"{table[i, num%10]}");
-        num = num/10;
+        b[i] = a[i];
     }
-    Console.WriteLine($"{addFigures}");
+
+    int [] c = new int [a.Length];
+
+    for (int i = 0; i < a.Length; i++)
+    {
+        if (b[i] == 'M') c[i] = 1000;
+        if (b[i] == 'D') c[i] = 500;
+        if (b[i] == 'C') c[i] = 100;
+        if (b[i] == 'L') c[i] = 50;
+        if (b[i] == 'X') c[i] = 10;
+        if (b[i] == 'V') c[i] = 5;
+        if (b[i] == 'I') c[i] = 1;
+    }
+
+    int summ = 0;
+    for (int j = 0; j < a.Length-1; j++)
+    {
+        if (c[j] >= c [j+1]) summ = summ + c[j];
+        else summ = summ - c [j];
+    }
+
+    Console.WriteLine ($"{summ+c[a.Length-1]}");
 }
 
-string[,] romanNums = new string [,] 
-{
-    {"","I","II","III","IV","V","VI","VII","VIII","IX"}, 
-    {"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"}, 
-    {"","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"}, 
-    {"","M","MM","MMM","","","","","",""}
-};
+Console.WriteLine ("Ведите римское число");
+string roman = (Console.ReadLine());
 
-Console.WriteLine ("Введите число 1 to 3999");
-int arabicEntered = int.Parse (Console.ReadLine());
-if (arabicEntered <1 || arabicEntered > 3999)
-{
-    Console.WriteLine ("Вы ввели неверное число");    
-}
-else ArabicIntoRoman (arabicEntered, romanNums);
-
-
+RomanIntoArabic (roman);
